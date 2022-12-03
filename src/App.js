@@ -1,7 +1,22 @@
 import logo from './logo.svg';
+import Add from './components/add';
+import List from './components/list';
+import Search from './components/search';
 import './App.css';
+import { useState } from 'react';
 
 function App() {
+
+  let [userList, setUserList] = useState([]);
+
+  let populateUserList = (data) => {
+    setUserList(array => [...array, data]);
+  };
+
+  let filterUserList = (data) => {
+    setUserList([data]);
+  };
+
   return (
     <div className="App">
       <header className="App-header">
@@ -17,6 +32,9 @@ function App() {
         >
           Learn React
         </a>
+        <Add populateUserList={populateUserList} />
+        <Search userData={userList} filterUserList={filterUserList}/>
+        <List userData={userList} />
       </header>
     </div>
   );
